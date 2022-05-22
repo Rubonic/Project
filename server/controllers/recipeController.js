@@ -31,9 +31,9 @@ exports.exploreCategories = async(req, res) => {
   try {
     const limitNumber = 20;
     const categories = await Category.find({}).limit(limitNumber);
-    res.render('categories', { title: 'Cooking Blog - Categories', categories } );
+    res.render('categories', { title: 'Cooking Blog - Categoreis', categories } );
   } catch (error) {
-    res.satus(500).send({message: error.message || "Error Occurred" });
+    res.satus(500).send({message: error.message || "Error Occured" });
   }
 } 
 
@@ -47,9 +47,9 @@ exports.exploreCategoriesById = async(req, res) => {
     let categoryId = req.params.id;
     const limitNumber = 20;
     const categoryById = await Recipe.find({ 'category': categoryId }).limit(limitNumber);
-    res.render('categories', { title: 'Cooking Blog - Categories', categoryById } );
+    res.render('categories', { title: 'Cooking Blog - Categoreis', categoryById } );
   } catch (error) {
-    res.satus(500).send({message: error.message || "Error Occurred" });
+    res.satus(500).send({message: error.message || "Error Occured" });
   }
 } 
  
@@ -63,7 +63,7 @@ exports.exploreRecipe = async(req, res) => {
     const recipe = await Recipe.findById(recipeId);
     res.render('recipe', { title: 'Cooking Blog - Recipe', recipe } );
   } catch (error) {
-    res.satus(500).send({message: error.message || "Error Occurred" });
+    res.satus(500).send({message: error.message || "Error Occured" });
   }
 } 
 
@@ -78,7 +78,7 @@ exports.searchRecipe = async(req, res) => {
     let recipe = await Recipe.find( { $text: { $search: searchTerm, $diacriticSensitive: true } });
     res.render('search', { title: 'Cooking Blog - Search', recipe } );
   } catch (error) {
-    res.satus(500).send({message: error.message || "Error Occurred" });
+    res.satus(500).send({message: error.message || "Error Occured" });
   }
   
 }
@@ -93,7 +93,7 @@ exports.exploreLatest = async(req, res) => {
     const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber);
     res.render('explore-latest', { title: 'Cooking Blog - Explore Latest', recipe } );
   } catch (error) {
-    res.satus(500).send({message: error.message || "Error Occurred" });
+    res.satus(500).send({message: error.message || "Error Occured" });
   }
 } 
 
@@ -110,7 +110,7 @@ exports.exploreRandom = async(req, res) => {
     let recipe = await Recipe.findOne().skip(random).exec();
     res.render('explore-random', { title: 'Cooking Blog - Explore Latest', recipe } );
   } catch (error) {
-    res.satus(500).send({message: error.message || "Error Occurred" });
+    res.satus(500).send({message: error.message || "Error Occured" });
   }
 } 
 
@@ -175,100 +175,100 @@ exports.submitRecipeOnPost = async(req, res) => {
 
 
 // Delete Recipe
-// async function deleteRecipe(){
-//   try {
-//     await Recipe.deleteOne({ name: 'New Recipe From Form' });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-// deleteRecipe();
+async function deleteRecipe(){
+  try {
+    await Recipe.deleteOne({ name: 'New Recipe From Form' });
+  } catch (error) {
+    console.log(error);
+  }
+}
+deleteRecipe();
 
 
 // Update Recipe
-// async function updateRecipe(){
-//   try {
-//     const res = await Recipe.updateOne({ name: 'New Recipe' }, { name: 'New Recipe Updated' });
-//     res.n; // Number of documents matched
-//     res.nModified; // Number of documents modified
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-// updateRecipe();
+async function updateRecipe(){
+  try {
+    const res = await Recipe.updateOne({ name: 'New Recipe' }, { name: 'New Recipe Updated' });
+    res.n; // Number of documents matched
+    res.nModified; // Number of documents modified
+  } catch (error) {
+    console.log(error);
+  }
+}
+updateRecipe();
 
 
 /**
  * Dummy Data Example 
 */
 
-// async function insertDymmyCategoryData(){
-//   try {
-//     await Category.insertMany([
-//       {
-//         "name": "Thai",
-//         "image": "thai-food.jpg"
-//       },
-//       {
-//         "name": "American",
-//         "image": "american-food.jpg"
-//       }, 
-//       {
-//         "name": "Chinese",
-//         "image": "chinese-food.jpg"
-//       },
-//       {
-//         "name": "Mexican",
-//         "image": "mexican-food.jpg"
-//       }, 
-//       {
-//         "name": "Indian",
-//         "image": "indian-food.jpg"
-//       },
-//       {
-//         "name": "Spanish",
-//         "image": "spanish-food.jpg"
-//       }
-//     ]);
-//   } catch (error) {
-//     console.log('err', + error)
-//   }
-// }
+async function insertDymmyCategoryData(){
+  try {
+    await Category.insertMany([
+      {
+        "name": "Thai",
+        "image": "thai-food.jpg"
+      },
+      {
+        "name": "American",
+        "image": "american-food.jpg"
+      }, 
+      {
+        "name": "Chinese",
+        "image": "chinese-food.jpg"
+      },
+      {
+        "name": "Mexican",
+        "image": "mexican-food.jpg"
+      }, 
+      {
+        "name": "Indian",
+        "image": "indian-food.jpg"
+      },
+      {
+        "name": "Spanish",
+        "image": "spanish-food.jpg"
+      }
+    ]);
+  } catch (error) {
+    console.log('err', + error)
+  }
+}
 
-// insertDymmyCategoryData();
+insertDymmyCategoryData();
 
 
-// async function insertDymmyRecipeData(){
-//   try {
-//     await Recipe.insertMany([
-//       { 
-//         "name": "Recipe Name Goes Here",
-//         "description": `Recipe Description Goes Here`,
-//         "email": "recipeemail@raddy.co.uk",
-//         "ingredients": [
-//           "1 level teaspoon baking powder",
-//           "1 level teaspoon cayenne pepper",
-//           "1 level teaspoon hot smoked paprika",
-//         ],
-//         "category": "American", 
-//         "image": "southern-friend-chicken.jpg"
-//       },
-//       { 
-//         "name": "Recipe Name Goes Here",
-//         "description": `Recipe Description Goes Here`,
-//         "email": "recipeemail@raddy.co.uk",
-//         "ingredients": [
-//           "1 level teaspoon baking powder",
-//           "1 level teaspoon cayenne pepper",
-//           "1 level teaspoon hot smoked paprika",
-//         ],
-//         "category": "American", 
-//         "image": "southern-friend-chicken.jpg"
-//       },
-//     ]);
-//   } catch (error) {
-//     console.log('err', + error)
-//   }
-// }
+async function insertDymmyRecipeData(){
+  try {
+    await Recipe.insertMany([
+      { 
+        "name": "Recipe Name Goes Here",
+        "description": `Recipe Description Goes Here`,
+        "email": "recipeemail@raddy.co.uk",
+        "ingredients": [
+          "1 level teaspoon baking powder",
+          "1 level teaspoon cayenne pepper",
+          "1 level teaspoon hot smoked paprika",
+        ],
+        "category": "American", 
+        "image": "southern-friend-chicken.jpg"
+      },
+      { 
+        "name": "Recipe Name Goes Here",
+        "description": `Recipe Description Goes Here`,
+        "email": "recipeemail@raddy.co.uk",
+        "ingredients": [
+          "1 level teaspoon baking powder",
+          "1 level teaspoon cayenne pepper",
+          "1 level teaspoon hot smoked paprika",
+        ],
+        "category": "American", 
+        "image": "southern-friend-chicken.jpg"
+      },
+    ]);
+  } catch (error) {
+    console.log('err', + error)
+  }
+}
 
-// insertDymmyRecipeData();
+insertDymmyRecipeData();
