@@ -226,8 +226,8 @@ async function insertDymmyCategoryData(){
         "image": "indian-food.jpg"
       },
       {
-        "name": "Spanish",
-        "image": "spanish-food.jpg"
+        "name": "German",
+        "image": "german-food.jpg"
       }
     ]);
   } catch (error) {
